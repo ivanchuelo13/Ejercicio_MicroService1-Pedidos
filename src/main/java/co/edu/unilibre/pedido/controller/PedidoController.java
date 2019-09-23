@@ -3,6 +3,7 @@ package co.edu.unilibre.pedido.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,7 @@ import co.edu.unilibre.pedido.service.IPedidoService;
 
 @RestController
 public class PedidoController {
-	@Autowired
+	@Autowired(required = true)
 	private IPedidoService pedidoService;
 	
 	@GetMapping("/Pedidos")
@@ -23,5 +24,10 @@ public class PedidoController {
 	@GetMapping("/{id}")
 	public Pedido getById(@PathVariable Long id) {
 		return pedidoService.getById(id);
+	}
+	
+	@GetMapping("/{id}/{quantity}")
+	public Pedido getById(@PathVariable Long id, @PathVariable Integer quantity) {
+		return pedidoService.findById(id, quantity);
 	}
 }
