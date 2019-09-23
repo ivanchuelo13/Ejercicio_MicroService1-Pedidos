@@ -1,12 +1,9 @@
 package co.edu.unilibre.pedido.model;
 
-<<<<<<< HEAD
-public class Pedido implements Serializable{
-=======
 public class Pedido {
 	private Inventary inventary;
 	private Integer cantidad;
->>>>>>> 8652fa41baab587250da5f5d7c95c3bdf6659477
+
 	
 	public Pedido(Inventary inventary, Integer cantidad) {
 		super();

@@ -13,26 +13,18 @@ import co.edu.unilibre.pedido.service.PedidoService;
 
 @RestController
 public class PedidoController {
-<<<<<<< HEAD
-	@Autowired
-	private PedidoService pedidoService;
-=======
-	@Autowired(required = true)
-	private IPedidoService pedidoService;
->>>>>>> f4cef5b78a721e40540ca7c530187a4707e4dac4
 	
-	@GetMapping("/Pedidos")
-	public List<Pedido> getList(){
+	@Autowired(required = true)
+	@Qualifier("pedidoServiceFeign")
+	private PedidoController pedidoService;
+	
+	@GetMapping("/list")
+	public List<Pedido> getAll(){
 		return pedidoService.getAll();
 	}
 	
 	@GetMapping("/{id}/{cantidad}")
 	public Pedido getById(@PathVariable Long id, @PathVariable Integer cantidad) {
 		return pedidoService.findById(id, cantidad);
-	}
-	
-	@GetMapping("/{id}/{quantity}")
-	public Pedido getById(@PathVariable Long id, @PathVariable Integer quantity) {
-		return pedidoService.findById(id, quantity);
 	}
 }
