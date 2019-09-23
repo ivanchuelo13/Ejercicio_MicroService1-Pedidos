@@ -8,20 +8,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.unilibre.pedido.model.Pedido;
-import co.edu.unilibre.pedido.service.IPedidoService;
+import co.edu.unilibre.pedido.service.PedidoService;
 
 @RestController
 public class PedidoController {
 	@Autowired
-	private IPedidoService pedidoService;
+	private PedidoService pedidoService;
 	
 	@GetMapping("/Pedidos")
 	public List<Pedido> getList(){
-		return pedidoService.getAllList();
+		return pedidoService.getAll();
 	}
 	
-	@GetMapping("/{id}")
-	public Pedido getById(@PathVariable Long id) {
-		return pedidoService.getById(id);
+	@GetMapping("/{id}/{cantidad}")
+	public Pedido getById(@PathVariable Long id, @PathVariable Integer cantidad) {
+		return pedidoService.findById(id, cantidad);
 	}
 }
