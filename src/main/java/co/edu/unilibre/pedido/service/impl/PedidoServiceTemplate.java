@@ -9,25 +9,24 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import co.edu.unilibre.pedido.model.Inventary;
 import co.edu.unilibre.pedido.model.Pedido;
 import co.edu.unilibre.pedido.service.PedidoService;
 
-@Service("itemServiceRestTemplate")
+@Service("pedidoServiceTemplate")
 public class PedidoServiceTemplate implements PedidoService{
 	@Autowired
 	private RestTemplate clientRest;
 	
 	public List<Pedido> getAll(){
-		List<Inventary> inventarys = Arrays.asList(clientRest.getForObject("http://localhost:10080/list", Product[].class));
-		return inventarys.stream().map(prod -> new Item(prod, 1)).collect(Collectors.toList());
+		List<Inventary> inventarys = Arrays.asList(clientRest.getForObject("http://localhost:10080/list", Inventary[].class));
+		return inventarys.stream().map(prod -> new Pedido(prod, 1)).collect(Collectors.toList());
 	}
 	
-	public Pedido findById(Long id, Integer quantity) {
+	public Pedido findById(Long id, Integer cantidad) {
 		Map<String, String> pathVariable = new HashMap<>();
 		pathVariable.put("id", id.toString());
-		Product product = clientRest.getForObject("http://localhost:10080/{id}", Product.class, pathVariable);
-		return new Item(product, quantity);
+		Inventary inventary = clientRest.getForObject("http://localhost:10080/{id}", Inventary.class, pathVariable);
+		return new Pedido(inventary, cantidad);
 	}
 }
