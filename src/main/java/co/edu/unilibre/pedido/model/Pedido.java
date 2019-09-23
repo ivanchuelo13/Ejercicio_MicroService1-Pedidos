@@ -1,5 +1,7 @@
 package co.edu.unilibre.pedido.model;
 
-public class Pedido {
+import java.io.Serializable;
 
+public class Pedido implements Serializable{
+	
 }
