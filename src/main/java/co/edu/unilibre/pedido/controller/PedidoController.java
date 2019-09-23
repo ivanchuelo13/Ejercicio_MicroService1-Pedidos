@@ -9,21 +9,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.unilibre.pedido.model.Pedido;
-import co.edu.unilibre.pedido.service.IPedidoService;
+import co.edu.unilibre.pedido.service.PedidoService;
 
 @RestController
 public class PedidoController {
+<<<<<<< HEAD
+	@Autowired
+	private PedidoService pedidoService;
+=======
 	@Autowired(required = true)
 	private IPedidoService pedidoService;
+>>>>>>> f4cef5b78a721e40540ca7c530187a4707e4dac4
 	
 	@GetMapping("/Pedidos")
 	public List<Pedido> getList(){
-		return pedidoService.getAllList();
+		return pedidoService.getAll();
 	}
 	
-	@GetMapping("/{id}")
-	public Pedido getById(@PathVariable Long id) {
-		return pedidoService.getById(id);
+	@GetMapping("/{id}/{cantidad}")
+	public Pedido getById(@PathVariable Long id, @PathVariable Integer cantidad) {
+		return pedidoService.findById(id, cantidad);
 	}
 	
 	@GetMapping("/{id}/{quantity}")
